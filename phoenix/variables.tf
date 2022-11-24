@@ -57,7 +57,7 @@ variable "github_repo" {
 variable "github_branch" {
   description = "GitHub branch name"
   type        = string
-  default     = "master"
+  default     = "main"
 }
 
 variable "github_owner" {
