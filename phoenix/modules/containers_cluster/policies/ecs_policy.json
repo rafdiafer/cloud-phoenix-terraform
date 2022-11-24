@@ -1,0 +1,19 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ecs:*",
+                "ecr:*",
+                "s3:*",
+                "ec2:*",
+                "cloudwatch:*",
+                "logs:*"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+    ]
+}

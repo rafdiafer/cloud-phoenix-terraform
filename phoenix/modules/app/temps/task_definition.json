@@ -1,0 +1,28 @@
+[
+    {
+        "name": "${container_name}",
+        "image": "${ecr_image}",
+        "memory": 500,
+        "essential": true,
+
+        "portMappings": [
+            {
+                "containerPort": 3000,
+                "protocol": "tcp"
+            }
+        ],
+
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "${service_log_group}",
+                "awslogs-region": "${aws_region}"
+            }
+        },
+
+        "environment": [{
+            "name": "Environment",
+            "value": "Prod"
+        }]
+    }
+]

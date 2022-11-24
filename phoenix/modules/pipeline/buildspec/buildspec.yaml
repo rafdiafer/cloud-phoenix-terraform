@@ -1,0 +1,19 @@
+version: 1
+phases:
+  install:
+    commands:
+        - npm install
+  pre_build:
+    commands:
+        - npm test
+        - eval $(aws ecr get-login --region $AWS_DEFAULT_REGION)
+        - BUILD_ID=$(echo $CODEBUILD_BUILD_ID | cut -d ':' -f 2)
+  build:
+    commands:
+        - echo Build started...
+        - echo Building the Docker image...
+        - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG --build-arg NODE_ENV=prod .
+  post_build:
+    commands:
+        - echo Build completed on 'date'
+        - docker push $REGISTRY_URL/$IMAGE_REPO_NAME

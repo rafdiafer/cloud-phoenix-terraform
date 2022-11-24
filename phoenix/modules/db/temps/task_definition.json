@@ -1,0 +1,48 @@
+[{
+    "name": "mongodb",
+    "image": "bitnami/mongo:${mongo_version}", 
+    "cpu": 1,
+    "memory": 500,
+    "essential": true,
+
+    "portMappings": [
+        {
+            "containerPort": 27017,
+            "hostPort": 27017
+        }
+    ],
+
+    "environment": [
+        {
+            "name": "MONGO_ROOT_USER",
+            "value": "root"
+        },
+
+        {
+            "name": "MONGO_ROOT_PASSWORD",
+            "value": "${mongo_root_pass}"
+        },
+
+        {
+            "name": "MONGO_DATABASE",
+            "value": "phoenix_db"
+        },
+
+        {
+            "name": "MONGO_USERNAME",
+            "value": "${mongo_username}"
+        },
+
+        {
+            "name": "MONGO_PASSWORD",
+            "value": "${mongo_user_pass}"
+        }
+    ],
+
+    "mountPoints": [
+        {
+          "sourceVolume": "${volume}",
+          "containerPath": "/data/db"
+        }
+    ]
+}]

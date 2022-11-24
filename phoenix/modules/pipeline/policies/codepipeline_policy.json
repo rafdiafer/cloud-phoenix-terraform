@@ -1,0 +1,34 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "iam:PassRole"
+            ],
+            "Resource": "*",
+            "Effect": "Allow",
+            "Condition": {
+                "StringEqualsIfExists": {
+                    "iam:PassedToService": [
+                        "cloudformation.amazonaws.com",
+                        "ec2.amazonaws.com",
+                        "ecs-tasks.amazonaws.com"
+                    ]
+                }
+            }
+        },
+
+        {
+            "Action": [
+                "cloudwatch:*",
+                "s3:*",
+                "ecs:*",
+                "ecr:*",
+                "codebuild:*",
+                "codedeploy:*"
+            ],
+            "Resource": "*",
+            "Effect": "Allow"
+        }
+    ]
+}
