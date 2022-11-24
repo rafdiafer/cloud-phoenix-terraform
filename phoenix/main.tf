@@ -90,6 +90,7 @@ module "pipeline" {
   app_name                 = var.app_name
   github_personal_token    = var.github_personal_token
   github_repo              = var.github_repo
+  github_repo_name         = var.github_repo_name
   github_branch            = var.github_branch
   github_owner             = var.github_owner
   ecr_image_url            = var.ecr_image_url

@@ -1,4 +1,4 @@
-version: 1
+version: 0.2
 phases:
   install:
     commands:
@@ -6,14 +6,16 @@ phases:
   pre_build:
     commands:
         - npm test
-        - eval $(aws ecr get-login --region $AWS_DEFAULT_REGION)
-        - BUILD_ID=$(echo $CODEBUILD_BUILD_ID | cut -d ':' -f 2)
+        - docker login -u AWS -p $(aws ecr get-login-password --region eu-central-1) $REGISTRY_URL
   build:
     commands:
         - echo Build started...
-        - echo Building the Docker image...
-        - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG --build-arg NODE_ENV=prod .
+        - docker build -t $IMAGE_NAME:$BUILD_ID --build-arg NODE_ENV=prod .
+        - docker tag $IMAGE_NAME:$BUILD_ID $REGISTRY_URL/$IMAGE_NAME:$BUILD_ID
   post_build:
     commands:
-        - echo Build completed on 'date'
-        - docker push $REGISTRY_URL/$IMAGE_REPO_NAME
+        - echo Build completed
+        - docker push $REGISTRY_URL/$IMAGE_NAME
+        - printf '[{"name":"%s","imageUri":"%s"}]' $IMAGE_NAME $REGISTRY_URL/$IMAGE_NAME:$BUILD_ID > imagedefinitions.json
+artifacts:
+    files: imagedefinitions.json

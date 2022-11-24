@@ -13,6 +13,11 @@ variable "github_repo" {
   type        = string
 }
 
+variable "github_repo_name" {
+  description = "Github repository name"
+  type        = string
+}
+
 variable "github_branch" {
   description = "GitHub branch name"
   type        = string

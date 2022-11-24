@@ -45,13 +45,19 @@ variable "cidr_block" {
 variable "github_personal_token" {
   description = "Personal token to provide access to GitHub"
   type        = string
-  default     = "$GITHUB_PERSONAL_TOKEN"
+  default     = "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"
 }
 
 variable "github_repo" {
   description = "Github repository URL for the app"
   type        = string
   default     = "https://github.com/rafdiafer/cloud-phoenix-kata"
+}
+
+variable "github_repo_name" {
+  description = "Github repository name"
+  type        = string
+  default     = "cloud-phoenix-kata"
 }
 
 variable "github_branch" {
@@ -69,7 +75,7 @@ variable "github_owner" {
 variable "ecr_image_url" {
   description = "ECR image URL"
   type        = string
-  default     = "022820857345.dkr.ecr.eu-central-1.amazonaws.com/phoenix"
+  default     = "022820857345.dkr.ecr.eu-central-1.amazonaws.com"
 }
 
 variable "instance_type" {
@@ -105,7 +111,7 @@ variable "source_ip_bastion_host" {
 variable "container_name" {
   description = "Container name"
   type        = string
-  default     = "PhoenixAppContainer"
+  default     = "phoenix"
 }
 
 variable "container_port" {

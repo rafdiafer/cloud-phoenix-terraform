@@ -11,5 +11,5 @@ output "ecs_cluster_name" {
 }
 
 output "ssm_mongo_connection_url" {
-  value = aws_ssm_parameter.ssm_mongo_connection_url.name
+  value = aws_ssm_parameter.ssm_mongo_connection_url.value
 }

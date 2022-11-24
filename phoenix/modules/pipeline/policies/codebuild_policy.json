@@ -6,6 +6,7 @@
             "Action": [
                 "ec2:*",
                 "logs:*",
+                "ecs:*",
                 "s3:*",
                 "codebuild:*",
                 "ecr:*"

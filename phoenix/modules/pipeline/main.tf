@@ -18,7 +18,7 @@ resource "aws_s3_bucket_acl" "codepipeline_s3_acl" {
 }
 
 resource "aws_codebuild_project" "phoenix_project" {
-  name           = "phoenix-project"
+  name           = "phoenix"
   description    = "Test CodeBuild Phoenix Project"
   build_timeout  = "5"
   queued_timeout = "5"
@@ -40,18 +40,18 @@ resource "aws_codebuild_project" "phoenix_project" {
     privileged_mode             = true
 
     environment_variable {
-      name  = "IMAGE_REPO_NAME"
+      name  = "IMAGE_NAME"
       value = var.app_name
-    }
-
-    environment_variable {
-      name  = "IMAGE_TAG"
-      value = "Latest"
     }
 
     environment_variable {
       name  = "REGISTRY_URL"
       value = var.ecr_image_url
+    }
+
+    environment_variable {
+      name  = "BUILD_ID"
+      value = "latest"
     }
 
     environment_variable {
@@ -70,7 +70,7 @@ resource "aws_codebuild_project" "phoenix_project" {
   source {
     type            = "GITHUB"
     location        = var.github_repo
-    git_clone_depth = 1
+    git_clone_depth = 0
     buildspec       = data.template_file.buildspec.rendered
   }
 
@@ -101,7 +101,7 @@ resource "aws_codepipeline" "codepipeline_phoenix_project" {
       output_artifacts = ["source_output"]
 
       configuration = {
-        Repo       = var.github_repo
+        Repo       = var.github_repo_name
         Branch     = var.github_branch
         Owner      = var.github_owner
         OAuthToken = var.github_personal_token
@@ -139,8 +139,8 @@ resource "aws_codepipeline" "codepipeline_phoenix_project" {
       version         = "1"
 
       configuration = {
-        ClusterName = "${var.app_name}_cluster"
-        ServiceName = "${var.app_name}_service"
+        ClusterName = "${var.app_name}"
+        ServiceName = "${var.app_name}-ecs-service"
       }
     }
   }
