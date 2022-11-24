@@ -11,5 +11,5 @@ resource "aws_iam_role_policy" "ecs_policies" {
 
 resource "aws_iam_instance_profile" "ecs_instance_profile" {
   name = "${var.app_name}-ecs-instance-profile"
-  role = aws_iam_role.ecs_role.id #.name ??
+  role = aws_iam_role.ecs_role.id
 }

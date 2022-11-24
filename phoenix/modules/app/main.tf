@@ -7,7 +7,7 @@ resource "aws_ecs_service" "ecs_service" {
 
   ordered_placement_strategy {
     type  = "binpack"
-    field = "cpu" #memory
+    field = "cpu"
   }
 
   load_balancer {

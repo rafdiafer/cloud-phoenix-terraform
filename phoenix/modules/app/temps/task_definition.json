@@ -1,7 +1,7 @@
 [
     {
         "name": "${container_name}",
-        "image": "${ecr_image}",
+        "image": "${ecr_image}/${container_name}",
         "memory": 500,
         "essential": true,
 
@@ -20,9 +20,11 @@
             }
         },
 
-        "environment": [{
-            "name": "Environment",
-            "value": "Prod"
-        }]
+        "environment": [
+            {
+                "name": "PORT",
+                "value": "3000"
+            }
+        ]
     }
 ]

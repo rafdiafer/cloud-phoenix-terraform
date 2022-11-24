@@ -66,7 +66,7 @@ resource "aws_internet_gateway" "igw" {
 
 resource "aws_nat_gateway" "nat_gw" {
   allocation_id = aws_eip.nat_gw_eip.id
-  subnet_id     = aws_subnet.public_subnet.0.id #Create it only in one availability zone ?
+  subnet_id     = aws_subnet.public_subnet.0.id
 }
 
 resource "aws_eip" "nat_gw_eip" {}

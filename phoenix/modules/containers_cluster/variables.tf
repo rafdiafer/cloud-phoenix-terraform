@@ -58,31 +58,3 @@ variable "health_check_path" {
 variable "bastion_sg" {
   description = "Only allow the Bastion Host security group to SSH the instances"
 }
-
-#############################################################
-
-/*
-
-variable "ecs_logging" {
-  type        = string
-  default     = "[\\\"json-file\\\",\\\"awslogs\\\"]"
-  description = "Adding logging option to ECS that the Docker containers can use."
-}
-
-variable "ecs_config" {
-  type        = string
-  default     = "echo '' > /etc/ecs/ecs.config"
-  description = "Specify ecs configuration or get it from S3. Example: aws s3 cp s3://some-bucket/ecs.config /etc/ecs/ecs.config"
-}
-
-variable "bastion_sg" {
-  type = string
-
-  description = <<DESCRIPTION
-Bastion host instance security group id
-from where the SSH access to the autoscaling instances
-is allowed.
-DESCRIPTION
-}
-
-*/

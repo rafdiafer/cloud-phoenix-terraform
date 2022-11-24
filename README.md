@@ -65,7 +65,9 @@ The following variables need to be defined:
 | aws_key_pair |  default_key_pair     |  AWS Key pair name to use   |
 | cidr_block |  172.16.0.0/16     |  CIDR block for the each subnet   |
 | github_personal_token | $GITHUB_PERSONAL_TOKEN      | Personal token to provide access to GitHub    |
-| github_branch |   -    |  GitHub branch name   |
+| github_repo |   https://github.com/rafdiafer/cloud-phoenix-kata    | Github repository URL for the app  |
+| github_repo_name | cloud-phoenix-kata     | Github repository name   |
+| github_branch |   main    |  GitHub branch name   |
 | github_owner | -      | Github repository owner    |
 | ecr_image_url |   -    | ECR image URL. It is an output from the services in the terraform file.    |
 | instance_type | t2.medium      | Instance type to use for the ECS cluster    |
@@ -73,7 +75,7 @@ The following variables need to be defined:
 | max_size | 4      | ECS maximum number of instances    |
 | bastion_host_ami | ami-076309742d466ad69      | AMI in use for the Bastion Host instance    |
 | source_ip_bastion_host |       | To only allow my IP address (or list of IP addresses) to connect to the Bastion Host    |
-| container_name | PhoenixAppContainer      | Container name    |
+| container_name | phoenix     | Container name    |
 | container_port | 3000      | Application port |
 | sns_subscription_email_address_list  |  -     | Email to send CPU peak alert |
 | mongo_container_cpu |  1024     | CPU capacity required for mongo container (1024 == 1 CPU)  |
@@ -84,7 +86,7 @@ The following variables need to be defined:
 | mongo_root_pass | -      | MongoDB Root user password |
 | aws_public_key_path | -      | Public key location |
 
-As described on the table above, the github_personal_token must be exported as an environment variable from the system.
+As described on the table above, the github_personal_token can be exported as an environment variable from the system.
 
 ```bash
 $ export GITHUB_PERSONAL_TOKEN = (Your personal token here)

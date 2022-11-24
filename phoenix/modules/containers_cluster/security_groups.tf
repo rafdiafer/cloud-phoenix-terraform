@@ -50,7 +50,7 @@ resource "aws_security_group" "alb_security_group" {
     description = "Allowing every egress communication"
     from_port   = 0
     to_port     = 0
-    protocol    = -1 # -1 means "all"
+    protocol    = -1
     cidr_blocks = ["0.0.0.0/0"]
   }
 
