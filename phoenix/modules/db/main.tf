@@ -52,6 +52,6 @@ resource "aws_instance" "mongo_ecs_instance" {
   ami                    = "ami-076309742d466ad69" //data.aws_ami.amazon_linux_2.id
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.db_sg.id]
-  subnet_id = var.subnet_id[0] #single instance mongodb
+  subnet_id              = var.subnet_id[0] #single instance mongodb
 }
 

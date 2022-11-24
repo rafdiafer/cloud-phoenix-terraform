@@ -4,9 +4,9 @@ variable "app_name" {
   default     = "phoenix"
 }
 
-variable aws_region {
+variable "aws_region" {
   description = "AWS region in use"
-  type = string
+  type        = string
 }
 
 variable "environment" {

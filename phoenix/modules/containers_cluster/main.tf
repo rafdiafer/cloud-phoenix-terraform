@@ -60,11 +60,11 @@ resource "aws_launch_template" "ecs_launch_template" {
 }
 
 resource "aws_autoscaling_group" "ecs_asg" {
-  name_prefix           = "${var.app_name}-ecs-asg"
-  min_size              = var.min_size
-  max_size              = var.max_size
-  desired_capacity      = var.min_size
-  vpc_zone_identifier   = var.private_subnet_ids
+  name_prefix         = "${var.app_name}-ecs-asg"
+  min_size            = var.min_size
+  max_size            = var.max_size
+  desired_capacity    = var.min_size
+  vpc_zone_identifier = var.private_subnet_ids
 
   launch_template {
     id      = aws_launch_template.ecs_launch_template.id

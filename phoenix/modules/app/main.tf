@@ -65,7 +65,7 @@ resource "aws_appautoscaling_policy" "ecs_app_as_policy" {
   target_tracking_scaling_policy_configuration {
     predefined_metric_specification {
       predefined_metric_type = "ALBRequestCountPerTarget"
-      resource_label = var.resource_label
+      resource_label         = var.resource_label
     }
 
     target_value = 100
