@@ -9,7 +9,8 @@
                     "ecs.amazonaws.com",
                     "application-autoscaling.amazonaws.com",
                     "ec2.amazonaws.com",
-                    "autoscaling.amazonaws.com"
+                    "autoscaling.amazonaws.com",
+                    "events.amazonaws.com"
                 ]
             }
         }

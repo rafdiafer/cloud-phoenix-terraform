@@ -9,7 +9,8 @@
                 "ecs:*",
                 "s3:*",
                 "codebuild:*",
-                "ecr:*"
+                "ecr:*",
+                "ssm:*"
             ],
             "Resource": "*"
         }

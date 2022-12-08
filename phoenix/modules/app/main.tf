@@ -1,3 +1,26 @@
+data "template_file" "ecs_task_template" {
+  template = file("${path.module}/temps/task_definition.json")
+
+  vars = {
+    container_name    = var.container_name
+    container_port    = var.container_port
+    ecr_image         = var.ecr_image_url
+    aws_region        = var.aws_region
+    service_log_group = aws_cloudwatch_log_group.service_logs.name
+  }
+}
+
+resource "aws_ecs_task_definition" "ecs_task" {
+  family                = "${var.app_name}-ecs-service-task"
+  container_definitions = data.template_file.ecs_task_template.rendered
+  task_role_arn         = aws_iam_role.ecs_task_role.arn
+}
+
+resource "aws_cloudwatch_log_group" "service_logs" {
+  name              = "/${var.app_name}/var/log/service"
+  retention_in_days = 7
+}
+
 resource "aws_ecs_service" "ecs_service" {
   name            = "${var.app_name}-ecs-service"
   cluster         = var.cluster
@@ -21,29 +44,6 @@ resource "aws_ecs_service" "ecs_service" {
       desired_count
     ]
   }
-}
-
-data "template_file" "ecs_task_template" {
-  template = file("${path.module}/temps/task_definition.json")
-
-  vars = {
-    container_name    = var.container_name
-    container_port    = var.container_port
-    ecr_image         = var.ecr_image_url
-    aws_region        = var.aws_region
-    service_log_group = aws_cloudwatch_log_group.service_logs.name
-  }
-}
-
-resource "aws_ecs_task_definition" "ecs_task" {
-  family                = "service"
-  container_definitions = data.template_file.ecs_task_template.rendered
-  task_role_arn         = aws_iam_role.ecs_task_role.arn
-}
-
-resource "aws_cloudwatch_log_group" "service_logs" {
-  name              = "/${var.app_name}/var/log/service"
-  retention_in_days = 7
 }
 
 resource "aws_appautoscaling_target" "ecs_target" {

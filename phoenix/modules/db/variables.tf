@@ -8,6 +8,11 @@ variable "instance_type" {
   type        = string
 }
 
+variable "aws_region" {
+  description = "AWS region for the infrastructure"
+  type        = string
+}
+
 variable "vpc_id" {
   description = "VPC ID"
   type        = string

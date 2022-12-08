@@ -37,7 +37,11 @@ resource "aws_route" "public" {
 resource "aws_route" "private" {
   route_table_id         = aws_route_table.private_route_table.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_internet_gateway.igw.id
+  gateway_id             = aws_nat_gateway.nat_gw.id
+
+  depends_on = [
+    aws_nat_gateway.nat_gw
+  ]
 }
 
 resource "aws_route_table" "private_route_table" {

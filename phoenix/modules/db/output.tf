@@ -11,5 +11,5 @@ output "ecs_cluster_name" {
 }
 
 output "ssm_mongo_connection_url" {
-  value = aws_ssm_parameter.ssm_mongo_connection_url.value
+  value = aws_ssm_parameter.ssm_mongo_connection_url.name #"mongodb://${var.mongo_username}:${var.mongo_user_pass}@${aws_instance.mongo_ecs_instance.private_ip}:27017/phoenix_db"
 }

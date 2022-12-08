@@ -1,34 +1,29 @@
 #!/bin/bash
-yum update -yum
-yum install -y amazon-cloudwatch-agent
+yum update -y
+yum install -y awslogs
 
-cat > /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json << EOF
-"logs":
-   {
-       "logs_collected": {
-           "files": {
-               "collect_list": [
-                   {
-                       "file_path": "/var/log/messages",
-                       "log_group_name": "${messages_log_group}",
-                       "timestamp_format": "%H: %M: %S%y%b%-d"
-                   },
-                   {
-                       "file_path": "/var/log/ecs",
-                       "log_group_name": "${ecs_log_group}",
-                       "timestamp_format": "%H: %M: %S%y%b%-d"
-                   },
-                   {
-                       "file_path": "/var/log/docker",
-                       "log_group_name": "${docker_log_group}",
-                       "timestamp_format": "%H: %M: %S%y%b%-d"
-                   }
-               ]
-           }
-       }
-   }
+echo '' > /etc/ecs/ecs.config
+
+echo ECS_CLUSTER=${cluster_name} > /etc/ecs/ecs.config
+
+cat > /etc/awslogs/awslogs.conf << EOF
+[/var/log/messages]
+file = /var/log/messages
+log_group_name = /${cluster_name}/var/log/messages
+datetime_format = %H: %M: %S%y%b%-d
+
+[/var/log/docker]
+file = /var/log/docker
+log_group_name = /${cluster_name}/var/log/docker
+datetime_format = %H: %M: %S%y%b%-d
+
+[/var/log/ecs]
+file = /var/log/ecs/ecs-agent.log.*
+log_group_name = /${cluster_name}/var/log/ecs
+datetime_format = %H: %M: %S%y%b%-d
 EOF
 
-/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
-
+service awslogs start
 echo "Amazon Cloudwatch Agent is initiated"
+
+start ecs

@@ -9,7 +9,8 @@
                 "s3:*",
                 "ec2:*",
                 "cloudwatch:*",
-                "logs:*"
+                "logs:*",
+                "ssm:*"
             ],
             "Resource": [
                 "*"

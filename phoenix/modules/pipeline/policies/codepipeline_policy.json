@@ -15,7 +15,8 @@
                 "ecs:*",
                 "ecr:*",
                 "codebuild:*",
-                "codedeploy:*"
+                "codedeploy:*",
+                "ssm:*"
             ],
             "Resource": "*",
             "Effect": "Allow"

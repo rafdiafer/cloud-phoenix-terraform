@@ -68,13 +68,13 @@ The following variables need to be defined:
 | github_repo |   https://github.com/rafdiafer/cloud-phoenix-kata    | Github repository URL for the app  |
 | github_repo_name | cloud-phoenix-kata     | Github repository name   |
 | github_branch |   main    |  GitHub branch name   |
-| github_owner | -      | Github repository owner    |
+| github_owner | rafdiafer     | Github repository owner    |
 | ecr_image_url |   -    | ECR image URL. It is an output from the services in the terraform file.    |
-| instance_type | t2.medium      | Instance type to use for the ECS cluster    |
+| instance_type | t2.micro      | Instance type to use for the ECS cluster    |
 | min_size | 1      | ECS minimum number of instances     |
 | max_size | 4      | ECS maximum number of instances    |
 | bastion_host_ami | ami-076309742d466ad69      | AMI in use for the Bastion Host instance    |
-| source_ip_bastion_host |       | To only allow my IP address (or list of IP addresses) to connect to the Bastion Host    |
+| source_ip_bastion_host |    -   | To only allow my IP address (or list of IP addresses) to connect to the Bastion Host    |
 | container_name | phoenix     | Container name    |
 | container_port | 3000      | Application port |
 | sns_subscription_email_address_list  |  -     | Email to send CPU peak alert |

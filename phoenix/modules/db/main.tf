@@ -2,7 +2,7 @@ resource "aws_ecs_cluster" "mongo_ecs" {
   name = "${var.app_name}-mongo-ecs"
 
   tags = {
-    Name        = "MongoDB Containers for the app"
+    Name        = "MongoDB Containers for Phoenix"
     Application = var.app_name
   }
 }
@@ -47,11 +47,35 @@ data "template_file" "container_definition" {
   }
 }
 
+data "template_file" "user_data" {
+  template = file("${path.module}/temps/user_data.sh")
+
+  vars = {
+    aws_region   = var.aws_region
+    cluster_name = "${var.app_name}-mongo-ecs"
+  }
+}
+
+data "aws_ami" "ecs_ami" {
+  most_recent = true
+  owners      = ["amazon"]
+
+  filter {
+    name   = "name"
+    values = ["amzn-ami-*-amazon-ecs-optimized"]
+  }
+}
 
 resource "aws_instance" "mongo_ecs_instance" {
-  ami                    = "ami-076309742d466ad69"
+  ami                    = data.aws_ami.ecs_ami.id #"ami-076309742d466ad69"
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.db_sg.id]
   subnet_id              = var.subnet_id[0] #single instance mongodb
+  user_data              = data.template_file.user_data.rendered
+
+  tags = {
+    Name = "MongoDB instance"
+    App  = var.app_name
+  }
 }
 

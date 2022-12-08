@@ -23,7 +23,7 @@ module "app" {
   sns_subscription_email_address_list = var.sns_subscription_email_address_list
   resource_label                      = "${module.containers_cluster.resource_label}/${module.containers_cluster.resource_label_target}"
 
-  depends_on = [module.networks.nat_gw, module.containers_cluster.cluster]
+  depends_on = [module.networks.nat_gw, module.containers_cluster.cluster, module.containers_cluster.alb_target_group]
 }
 
 module "networks" {
@@ -39,7 +39,7 @@ module "bastion_host" {
   app_name               = var.app_name
   aws_az                 = var.aws_az
   vpc_id                 = module.networks.vpc_id
-  subnet_id              = module.networks.private_subnet_ids
+  subnet_id              = module.networks.public_subnet_ids
   bastion_host_ami       = var.bastion_host_ami
   instance_type          = var.instance_type
   aws_key_pair_name      = var.aws_key_pair_name
@@ -68,6 +68,7 @@ module "containers_cluster" {
 module "db" {
   source                 = "./modules/db"
   app_name               = var.app_name
+  aws_region             = var.aws_region
   vpc_id                 = module.networks.vpc_id
   subnet_id              = module.networks.private_subnet_ids
   aws_az                 = var.aws_az

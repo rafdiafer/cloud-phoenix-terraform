@@ -45,7 +45,6 @@ variable "cidr_block" {
 variable "github_personal_token" {
   description = "Personal token to provide access to GitHub"
   type        = string
-  #default     = ""
 }
 
 variable "github_repo" {
@@ -69,19 +68,18 @@ variable "github_branch" {
 variable "github_owner" {
   description = "GitHub repository owner"
   type        = string
-  #default     = "rafdiafer"
+  default     = "rafdiafer"
 }
 
 variable "ecr_image_url" {
   description = "ECR image URL"
   type        = string
-  #default     = "022820857345.dkr.ecr.eu-central-1.amazonaws.com"
 }
 
 variable "instance_type" {
   description = "Instance type to use for the ECS cluster"
   type        = string
-  default     = "t2.medium"
+  default     = "t2.micro"
 }
 
 variable "min_size" {
@@ -105,7 +103,6 @@ variable "bastion_host_ami" {
 variable "source_ip_bastion_host" {
   description = "Only allow my IP address (or list of IP addresses) to connect to the Bastion Host"
   type        = list(string)
-  #default     = [""]
 }
 
 variable "container_name" {
@@ -123,7 +120,6 @@ variable "container_port" {
 variable "sns_subscription_email_address_list" {
   description = "Email to send CPU peak alert"
   type        = string
-  default     = "rafadiazfdez4@gmail.com"
 }
 
 variable "mongo_container_cpu" {
@@ -153,17 +149,14 @@ variable "mongo_username" {
 variable "mongo_root_pass" {
   description = "MongoDB Root user password"
   type        = string
-  #default     = ""
 }
 
 variable "mongo_user_pass" {
   description = "MongoDB app user password"
   type        = string
-  #default     = ""
 }
 
 variable "aws_public_key_path" {
   description = "Public key location"
   type        = string
-  default     = ""
 }

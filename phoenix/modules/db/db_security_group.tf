@@ -19,6 +19,14 @@ resource "aws_security_group" "db_sg" {
     security_groups = [var.ecs_security_group]
   }
 
+  egress {
+    description = "Allowing every egress communication"
+    from_port   = 0
+    to_port     = 0
+    protocol    = -1
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   tags = {
     Name = "Security Group for Bastion Host"
   }

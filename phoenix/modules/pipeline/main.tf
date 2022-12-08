@@ -57,6 +57,7 @@ resource "aws_codebuild_project" "phoenix_project" {
     environment_variable {
       name  = "DB_CONNECTION_STRING"
       value = var.ssm_mongo_connection_url
+      type  = "PARAMETER_STORE"
     }
   }
 
